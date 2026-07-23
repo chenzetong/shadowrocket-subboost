@@ -88,7 +88,7 @@ def merge_rule_lists(primary: bytes, supplements: list[tuple[str, bytes]]) -> by
         if line.strip() and not line.lstrip().startswith(("#", ";"))
     }
     for source, content in supplements:
-        lines.extend(("", f"# > Daily supplement: {source}"))
+        lines.extend(("", f"# > Weekly supplement: {source}"))
         for line in content.decode("utf-8").splitlines():
             stripped = line.strip()
             if not stripped or stripped.startswith(("#", ";")) or stripped in seen:

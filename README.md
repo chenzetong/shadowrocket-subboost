@@ -80,16 +80,16 @@ python3 scripts/render_config.py \
 
 `--update-url` 只能填写配置文件地址，不能填写节点订阅地址。
 
-## 每日规则同步
+## 每周规则同步
 
-`.github/workflows/sync-rules.yml` 每天北京时间 **03:17** 自动运行：
+`.github/workflows/sync-rules.yml` 每周一北京时间 **03:17** 自动运行：
 
 1. 获取配置引用的 21 个上游 Shadowrocket 规则集。
 2. 校验响应与规则格式，并保存到 `rules/`。
 3. 将经典 Apple 规则和 `Apple_Domain.list` 去重合并，避免上游经典列表缺少约 1,550 条域名。
 4. 更新 `rules/manifest.json` 的来源、规则数量及 SHA-256。
 5. 重新生成并校验 `Shadowrocket.conf`，使其引用本仓库托管的规则。
-6. 仅在内容确实变化时由 `github-actions[bot]` 提交，不制造每日空提交。
+6. 仅在内容确实变化时由 `github-actions[bot]` 提交，不制造每周空提交。
 
 也可以在 GitHub Actions 页面手动运行 `Sync upstream rules`，或在本地执行：
 
@@ -116,7 +116,7 @@ shadowrocket-subboost/
 ├── Shadowrocket.conf
 ├── Shadowrocket.template.conf
 ├── mihomo.template.yaml        # 仅作 Clash 迁移对照
-├── rules/                       # 每日同步的规则快照及 manifest
+├── rules/                       # 每周同步的规则快照及 manifest
 ├── scripts/
 │   ├── render_config.py
 │   ├── sync_rules.py

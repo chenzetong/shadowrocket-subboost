@@ -64,7 +64,7 @@ IP-CIDR,2a01:b740::/32,no-resolve
 IP-CIDR,63.92.224.0/19,no-resolve
 IP-CIDR,65.199.22.0/23,no-resolve
 
-# > Daily supplement: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list
+# > Weekly supplement: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list
 DOMAIN-SUFFIX,100beatscheap.com
 DOMAIN-SUFFIX,12diasdepresentesdeitunes.com
 DOMAIN-SUFFIX,12diasderegalosdeitunes.cl

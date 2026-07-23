@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "aggregate_sha256": "a0290f6a59fa1b0941e7747b2fb7b7d361809f3196e9e9fd251eb1573a823851",
+  "aggregate_sha256": "22c73efcc6d70dc2617de85c57fe32ebe969690a05e5cb6df7201780795ed5e1",
   "sources": [
     {
       "file": "BlockHttpDNS.list",
@@ -128,7 +128,7 @@
         "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/Apple.list",
         "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list"
       ],
-      "sha256": "eaa25a73be7f3c9062d2f7a0c49204e07cfc0e652c88aca652a93c0318dc2397",
+      "sha256": "13d6b78445cb485a61914f0f1b9fd6629f10d133ee9c20e69bfd1b681f154373",
       "rules": 1603
     },
     {

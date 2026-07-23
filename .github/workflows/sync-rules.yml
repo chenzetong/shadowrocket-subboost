@@ -2,8 +2,8 @@ name: Sync upstream rules
 
 on:
   schedule:
-    # 03:17 Asia/Shanghai (19:17 UTC on the previous day)
-    - cron: "17 19 * * *"
+    # Every Monday at 03:17 Asia/Shanghai (Sunday 19:17 UTC)
+    - cron: "17 19 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -28,6 +28,8 @@ jobs:
       - name: Regenerate configuration
         run: >-
           python scripts/render_config.py --force
+          --update-url
+          "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}/Shadowrocket.conf"
           --rules-base-url
           "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}/rules"
       - name: Validate configuration
