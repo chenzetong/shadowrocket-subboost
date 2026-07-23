@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "aggregate_sha256": "a0290f6a59fa1b0941e7747b2fb7b7d361809f3196e9e9fd251eb1573a823851",
+  "sources": [
+    {
+      "file": "BlockHttpDNS.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list"
+      ],
+      "sha256": "2d44341f27493c165df1e2ea695e5e566d44e361dd84eee40145984cad3da6b4",
+      "rules": 63
+    },
+    {
+      "file": "Advertising.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Advertising/Advertising.list"
+      ],
+      "sha256": "d8e7247683b689fcaa714e9d1c917aa1880d9f7c0be54b9d93baba4fc76b3e3a",
+      "rules": 781
+    },
+    {
+      "file": "AI.list",
+      "sources": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/AI.list"
+      ],
+      "sha256": "f3936d6e00dea78fa0ce6acb1552f1af25e9815b976fc05ccdd18409ecd1922d",
+      "rules": 39
+    },
+    {
+      "file": "Google.list",
+      "sources": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/Google.list"
+      ],
+      "sha256": "f6eeba7b8465bec2b01950194746e7ed3d091931eb42b8fcc7d011a4b57b25c4",
+      "rules": 721
+    },
+    {
+      "file": "YouTube.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list"
+      ],
+      "sha256": "f764cd91a779982225b3553ece8033c86a6545f4990f5fefd356805de962aee9",
+      "rules": 190
+    },
+    {
+      "file": "BiliBili.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BiliBili/BiliBili.list"
+      ],
+      "sha256": "9b22a7bdf97792346bf480771841b6cd1097ec7ad034b34528c14f3798107854",
+      "rules": 127
+    },
+    {
+      "file": "Lan.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list"
+      ],
+      "sha256": "e524edec216ed7f2fa2f3eb3fe09fe70121acf88408c2394d19b3e2331c54de7",
+      "rules": 140
+    },
+    {
+      "file": "Telegram.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list"
+      ],
+      "sha256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab",
+      "rules": 40
+    },
+    {
+      "file": "Twitter.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list"
+      ],
+      "sha256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97",
+      "rules": 33
+    },
+    {
+      "file": "GitHub.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list"
+      ],
+      "sha256": "ced8ab0ecda5775d04ec8ee6a57b282181108565331a6a1d85e9a26fee25d79b",
+      "rules": 31
+    },
+    {
+      "file": "GitLab.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitLab/GitLab.list"
+      ],
+      "sha256": "0c41418dd3d49d6313c5516b1d828a39aa13e1c08b9750698b5e4ec5d7ba5f8c",
+      "rules": 6
+    },
+    {
+      "file": "Atlassian.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Atlassian/Atlassian.list"
+      ],
+      "sha256": "243613384193edb80bcc0ee4106fc2b110c23b7c32f46258947be453f483ab9f",
+      "rules": 5
+    },
+    {
+      "file": "Microsoft.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list"
+      ],
+      "sha256": "22df1a1017ad5d41755bf020ca8eb9afeedc7bdc2c649ed2074b255227a7ed8e",
+      "rules": 671
+    },
+    {
+      "file": "HK_Broker.list",
+      "sources": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/HK_Broker.list"
+      ],
+      "sha256": "1c1f7bedbaa9bb2342785bc7a66ce1f17762f9cf6711051ed3bee16390e34252",
+      "rules": 155
+    },
+    {
+      "file": "ApplePush.list",
+      "sources": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/ApplePush.list"
+      ],
+      "sha256": "078500e904a024b4efe3fb5c0637bf4271514ed5b91100feed98588e6564eae8",
+      "rules": 4
+    },
+    {
+      "file": "Apple.list",
+      "sources": [
+        "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/Apple.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list"
+      ],
+      "sha256": "eaa25a73be7f3c9062d2f7a0c49204e07cfc0e652c88aca652a93c0318dc2397",
+      "rules": 1603
+    },
+    {
+      "file": "PayPal.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/PayPal/PayPal.list"
+      ],
+      "sha256": "4ffb6f94d2f1eff835c24b533c3d1d6e0c5a4cfbc32740fa9c32315ae218fd18",
+      "rules": 248
+    },
+    {
+      "file": "Stripe.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Stripe/Stripe.list"
+      ],
+      "sha256": "06de3de06eadf2f88698ab0e82ad9bf71dbccc61844e64fb73e0eaa47ba81708",
+      "rules": 1
+    },
+    {
+      "file": "Binance.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Binance/Binance.list"
+      ],
+      "sha256": "034b1730ac0adb39a8a88685d6f6864a7070a14d722acbf8f3859806b28b92a4",
+      "rules": 12
+    },
+    {
+      "file": "China.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/China/China.list"
+      ],
+      "sha256": "65477cd1e2917a8ca09ba08132e9d9131c54c0d9e1cfcba0be2eaa8ea1a04b75",
+      "rules": 63
+    },
+    {
+      "file": "Global.list",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Global/Global.list"
+      ],
+      "sha256": "7a04ebd143df2071548f6b63c51a678f1caeaf00380ff2fc3c3cb8d0c9ee1e6a",
+      "rules": 198
+    }
+  ]
+}

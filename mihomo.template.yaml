@@ -1,0 +1,578 @@
+# shadowrocket-subboost - Mihomo configuration template
+# Generate mihomo.yaml with: python3 scripts/render_config.py --subscription-url "https://..."
+
+mixed-port: 7897
+allow-lan: true
+mode: rule
+log-level: info
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+
+dns:
+  enable: true
+  listen: "127.0.0.1:5335"
+  use-system-hosts: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 180.76.76.76
+    - 182.254.118.118
+    - 8.8.8.8
+    - 180.184.2.2
+  nameserver:
+    - 180.76.76.76
+    - 119.29.29.29
+    - 180.184.1.1
+    - 223.5.5.5
+    - 8.8.8.8
+    - "https://223.6.6.6/dns-query#h3=true"
+    - "https://dns.alidns.com/dns-query"
+    - "https://cloudflare-dns.com/dns-query"
+    - "https://doh.pub/dns-query"
+  fallback:
+    - "https://000000.dns.nextdns.io/dns-query#h3=true"
+    - "https://dns.alidns.com/dns-query"
+    - "https://doh.pub/dns-query"
+    - "https://public.dns.iij.jp/dns-query"
+    - "https://101.101.101.101/dns-query"
+    - "https://208.67.220.220/dns-query"
+    - "tls://8.8.4.4"
+    - "tls://1.0.0.1:853"
+    - "https://cloudflare-dns.com/dns-query"
+    - "https://dns.google/dns-query"
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+    domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.twitter.com"
+      - "+.youtube.com"
+      - "+.xn--ngstr-lra8j.com"
+      - "+.google.cn"
+      - "+.googleapis.cn"
+      - "+.googleapis.com"
+      - "+.gvt1.com"
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.in-addr.arpa"
+    - "*.ip6.arpa"
+    - localhost
+    - localhost.weixin.qq.com
+    - captive.apple.com
+    - "*.icloud.com"
+    - "*.icloud-content.com"
+    - "*.apple-cloudkit.com"
+    - "*.cdn-apple.com"
+    - "*.mzstatic.com"
+    - "stun.*.*.*"
+    - "stun.*.*"
+    - time.windows.com
+    - time.nist.gov
+    - time.apple.com
+    - time.asia.apple.com
+    - "*.ntp.org.cn"
+    - "*.openwrt.pool.ntp.org"
+    - time1.cloud.tencent.com
+    - time.ustc.edu.cn
+    - pool.ntp.org
+    - ntp.ubuntu.com
+    - ntp.aliyun.com
+    - ntp1.aliyun.com
+    - ntp2.aliyun.com
+    - ntp3.aliyun.com
+    - ntp4.aliyun.com
+    - ntp5.aliyun.com
+    - ntp6.aliyun.com
+    - ntp7.aliyun.com
+    - time1.aliyun.com
+    - time2.aliyun.com
+    - time3.aliyun.com
+    - time4.aliyun.com
+    - time5.aliyun.com
+    - time6.aliyun.com
+    - time7.aliyun.com
+    - "*.time.edu.cn"
+    - time1.apple.com
+    - time2.apple.com
+    - time3.apple.com
+    - time4.apple.com
+    - time5.apple.com
+    - time6.apple.com
+    - time7.apple.com
+    - time1.google.com
+    - time2.google.com
+    - time3.google.com
+    - time4.google.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - localhost.ptlogin2.qq.com
+    - "*.*.*.srv.nintendo.net"
+    - "*.*.stun.playstation.net"
+    - "xbox.*.*.microsoft.com"
+    - "*.ipv6.microsoft.com"
+    - "*.*.xboxlive.com"
+    - speedtest.cros.wr.pvp.net
+    - "+.sii.edu.cn"
+    - "+.seu.edu.cn"
+
+profile:
+  store-selected: true
+  store-fake-ip: false
+
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    QUIC:
+      ports: [443, 8443]
+
+# Preserve the local WeChat callback used by the reference configuration.
+hosts:
+  localhost.weixin.qq.com: 127.0.0.1
+
+# Keep the subscription URL outside version control. The render script replaces
+# this placeholder and writes the ignored mihomo.yaml file.
+proxy-providers:
+  subscription:
+    type: http
+    url: "https://example.com/__SUBSCRIPTION_URL_PLACEHOLDER__"
+    path: ./providers/subscription.yaml
+    interval: 86400
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 300
+      lazy: false
+
+proxies: []
+
+proxy-groups:
+  - name: "🚀 节点选择"
+    type: select
+    use: [subscription]
+    proxies: ["⚡ 自动选择", DIRECT, REJECT, "🇺🇸 美国中转", "🇬🇧 伦敦->荷兰"]
+
+  - name: "⚡ 自动选择"
+    type: url-test
+    use: [subscription]
+    filter: "(?i)^(dmit-pro-cuwhbza65y|dmit-malibu-0707|bwg-megabox-0910|ss-QQPW-US1|gee-ld-jvf53ssmv6|ss-helan)$"
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+    lazy: false
+
+  - name: "🇺🇸 美国中转"
+    type: select
+    use: [subscription]
+    filter: "(?i)^(bwg-megabox-0910|dmit-malibu-0707|dmit-pro-cuwhbza65y)$"
+
+  - name: "🇬🇧 伦敦->荷兰"
+    type: select
+    use: [subscription]
+    filter: "(?i)^gee-ld-jvf53ssmv6$"
+
+  - name: "🛑 广告拦截"
+    type: select
+    proxies: [REJECT, DIRECT, "🚀 节点选择"]
+
+  - name: "🧱 DNS 防泄露"
+    type: select
+    proxies: [REJECT, "🚀 节点选择", DIRECT]
+
+  - name: "🤖 AI 服务"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "✨ Gemini"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "🔍 谷歌服务"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "📹 油管视频"
+    type: select
+    use: [subscription]
+    proxies: ["⚡ 自动选择", "🚀 节点选择", DIRECT, REJECT]
+
+  - name: "📲 电报消息"
+    type: select
+    use: [subscription]
+    proxies: ["⚡ 自动选择", "🚀 节点选择", DIRECT, REJECT]
+
+  - name: "🐦 推特/X"
+    type: select
+    use: [subscription]
+    proxies: ["⚡ 自动选择", "🚀 节点选择", DIRECT, REJECT]
+
+  - name: "🐱 代码托管"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "🍎 苹果推送"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "🍏 苹果服务"
+    type: select
+    use: [subscription]
+    proxies: [DIRECT, "🚀 节点选择", "⚡ 自动选择", REJECT]
+
+  - name: "📈 券商服务"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "🇺🇸 美国中转", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "🏠 私有网络"
+    type: select
+    use: [subscription]
+    proxies: [DIRECT, REJECT, "🚀 节点选择", "⚡ 自动选择"]
+
+  - name: "🔒 国内服务"
+    type: select
+    use: [subscription]
+    proxies: [DIRECT, REJECT, "🚀 节点选择", "⚡ 自动选择"]
+
+  - name: "🌍 非中国"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "💳 支付平台"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+  - name: "₿ 加密货币"
+    type: select
+    use: [subscription]
+    proxies: ["🚀 节点选择", "⚡ 自动选择", DIRECT, REJECT]
+
+rule-providers:
+  block-httpdns:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/BlockHttpDNS/BlockHttpDNS.list"
+    path: ./ruleset/block-httpdns.list
+    interval: 86400
+  category-ads-all:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ads-all.mrs"
+    path: ./ruleset/category-ads-all.mrs
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"
+    path: ./ruleset/private.mrs
+    interval: 86400
+  private-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"
+    path: ./ruleset/private-ip.mrs
+    interval: 86400
+  geolocation-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs"
+    path: ./ruleset/geolocation-cn.mrs
+    interval: 86400
+  cn-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"
+    path: ./ruleset/cn-ip.mrs
+    interval: 86400
+  geolocation-!cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"
+    path: "./ruleset/geolocation-!cn.mrs"
+    interval: 86400
+  openai:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs"
+    path: ./ruleset/openai.mrs
+    interval: 86400
+  anthropic:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/anthropic.mrs"
+    path: ./ruleset/anthropic.mrs
+    interval: 86400
+  category-ai-chat-!cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-chat-!cn.mrs"
+    path: "./ruleset/category-ai-chat-!cn.mrs"
+    interval: 86400
+  google-gemini:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google-gemini.mrs"
+    path: ./ruleset/google-gemini.mrs
+    interval: 86400
+  google:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"
+    path: ./ruleset/google.mrs
+    interval: 86400
+  lingjing-ai:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/AI.list"
+    path: ./ruleset/lingjing-ai.list
+    interval: 86400
+  youtube:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"
+    path: ./ruleset/youtube.mrs
+    interval: 86400
+  bilibili:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"
+    path: ./ruleset/bilibili.mrs
+    interval: 86400
+  telegram:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"
+    path: ./ruleset/telegram.mrs
+    interval: 86400
+  telegram-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"
+    path: ./ruleset/telegram-ip.mrs
+    interval: 86400
+  twitter:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/twitter.mrs"
+    path: ./ruleset/twitter.mrs
+    interval: 86400
+  twitter-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/twitter.mrs"
+    path: ./ruleset/twitter-ip.mrs
+    interval: 86400
+  github:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"
+    path: ./ruleset/github.mrs
+    interval: 86400
+  gitlab:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gitlab.mrs"
+    path: ./ruleset/gitlab.mrs
+    interval: 86400
+  atlassian:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/atlassian.mrs"
+    path: ./ruleset/atlassian.mrs
+    interval: 86400
+  microsoft:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"
+    path: ./ruleset/microsoft.mrs
+    interval: 86400
+  apple-push:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/ApplePush.list"
+    path: ./ruleset/apple-push.list
+    interval: 86400
+  apple:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"
+    path: ./ruleset/apple.mrs
+    interval: 86400
+  apple-ip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/apple.mrs"
+    path: ./ruleset/apple-ip.mrs
+    interval: 86400
+  hk-broker:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/LingJingMaster/Shadowrocket-Rules/refs/heads/main/HK_Broker.list"
+    path: ./ruleset/hk-broker.list
+    interval: 86400
+  paypal:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/paypal.mrs"
+    path: ./ruleset/paypal.mrs
+    interval: 86400
+  stripe:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/stripe.mrs"
+    path: ./ruleset/stripe.mrs
+    interval: 86400
+  wise:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/wise.mrs"
+    path: ./ruleset/wise.mrs
+    interval: 86400
+  binance:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/binance.mrs"
+    path: ./ruleset/binance.mrs
+    interval: 86400
+  cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"
+    path: ./ruleset/cn.mrs
+    interval: 86400
+  huggingface:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/huggingface.mrs"
+    path: ./ruleset/huggingface.mrs
+    interval: 86400
+
+# Rules are evaluated from top to bottom. Keep specialized services before the
+# broad China/non-China sets.
+rules:
+  # Local callbacks and reverse-DNS zones must not be captured by broader sets.
+  - DOMAIN,localhost.weixin.qq.com,DIRECT
+  - DOMAIN-SUFFIX,local,🏠 私有网络
+  - DOMAIN-SUFFIX,in-addr.arpa,🏠 私有网络
+  - DOMAIN-SUFFIX,ip6.arpa,🏠 私有网络
+  - DOMAIN,shortconn.im.qcloud.com,🔒 国内服务
+  - RULE-SET,block-httpdns,🧱 DNS 防泄露
+  - RULE-SET,category-ads-all,🛑 广告拦截
+  - RULE-SET,private,🏠 私有网络
+  - RULE-SET,private-ip,🏠 私有网络,no-resolve
+  - DOMAIN-SUFFIX,bybit.eu,🚀 节点选择
+  - DOMAIN-SUFFIX,wsnailong.com,⚡ 自动选择
+  - RULE-SET,huggingface,⚡ 自动选择
+  - RULE-SET,google-gemini,✨ Gemini
+  - RULE-SET,openai,🤖 AI 服务
+  - RULE-SET,anthropic,🤖 AI 服务
+  - RULE-SET,category-ai-chat-!cn,🤖 AI 服务
+  - RULE-SET,lingjing-ai,🤖 AI 服务
+  # Gemini and AI stay above the complete Google set to preserve their groups.
+  - RULE-SET,google,🔍 谷歌服务
+  - RULE-SET,youtube,📹 油管视频
+  - RULE-SET,bilibili,🔒 国内服务
+  - RULE-SET,telegram,📲 电报消息
+  - RULE-SET,telegram-ip,📲 电报消息,no-resolve
+  - RULE-SET,twitter,🐦 推特/X
+  - RULE-SET,twitter-ip,🐦 推特/X,no-resolve
+  - RULE-SET,github,🐱 代码托管
+  - RULE-SET,gitlab,🐱 代码托管
+  - RULE-SET,atlassian,🐱 代码托管
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  # Apple Push is a subset of Apple and therefore must be evaluated first.
+  - RULE-SET,apple-push,🍎 苹果推送
+  - RULE-SET,apple,🍏 苹果服务
+  - RULE-SET,apple-ip,🍏 苹果服务,no-resolve
+  - RULE-SET,hk-broker,📈 券商服务
+  - RULE-SET,paypal,💳 支付平台
+  - RULE-SET,stripe,💳 支付平台
+  - RULE-SET,wise,💳 支付平台
+  - RULE-SET,binance,₿ 加密货币
+  - RULE-SET,geolocation-cn,🔒 国内服务
+  - RULE-SET,cn-ip,🔒 国内服务,no-resolve
+  - RULE-SET,geolocation-!cn,🌍 非中国
+  - RULE-SET,cn,🔒 国内服务
+  - MATCH,🐟 漏网之鱼

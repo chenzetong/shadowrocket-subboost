@@ -1,0 +1,47 @@
+name: Sync upstream rules
+
+on:
+  schedule:
+    # 03:17 Asia/Shanghai (19:17 UTC on the previous day)
+    - cron: "17 19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-rules
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch and vendor upstream rules
+        run: python scripts/sync_rules.py
+      - name: Regenerate configuration
+        run: >-
+          python scripts/render_config.py --force
+          --rules-base-url
+          "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}/rules"
+      - name: Validate configuration
+        run: python scripts/validate_config.py
+      - name: Commit changed rules
+        shell: bash
+        run: |
+          if git diff --quiet -- Shadowrocket.conf rules/manifest.json rules; then
+            echo "No upstream rule changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Shadowrocket.conf rules
+          git commit -m "chore: sync upstream rules"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
