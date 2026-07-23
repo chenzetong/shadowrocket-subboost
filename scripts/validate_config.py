@@ -14,6 +14,15 @@ REQUIRED_SECTIONS = ("General", "Proxy", "Proxy Group", "Rule", "Host")
 BUILTIN_POLICIES = {"DIRECT", "REJECT", "PROXY"}
 SECTION_RE = re.compile(r"^\[([^]]+)]$")
 URL_RE = re.compile(r"https?://[^,\s]+")
+EXPECTED_GROUP_DEFAULTS = {
+    "🤖 AI 服务": "🚀 节点选择 1",
+    "✨ Gemini": "🚀 节点选择 1",
+    "🔍 谷歌服务": "🚀 节点选择 1",
+    "📈 券商服务": "🚀 节点选择 2",
+    "💳 支付平台": "🚀 节点选择 2",
+    "₿ 加密货币": "🚀 节点选择 2",
+}
+DYNAMIC_SELECTOR_GROUPS = {"🚀 节点选择 1", "🚀 节点选择 2"}
 
 # Each left-hand marker must occur before the right-hand marker. These checks
 # encode the intentional exceptions to otherwise broad Google/Apple/country sets.
@@ -78,6 +87,25 @@ def validate(path: Path) -> list[str]:
         if not definition.startswith(("select,", "url-test,", "fallback,")):
             errors.append(f"unsupported proxy group type for {name!r}")
         groups[name] = definition
+
+    for name, expected_default in EXPECTED_GROUP_DEFAULTS.items():
+        definition = groups.get(name)
+        if definition is None:
+            errors.append(f"missing proxy group: {name}")
+            continue
+        values = [part.strip() for part in definition.split(",")]
+        actual_default = values[1] if len(values) > 1 else None
+        if actual_default != expected_default:
+            errors.append(
+                f"proxy group {name!r} must default to {expected_default!r}"
+            )
+
+    for name in DYNAMIC_SELECTOR_GROUPS:
+        definition = groups.get(name)
+        if definition is None:
+            errors.append(f"missing dynamic proxy group: {name}")
+        elif "policy-regex-filter=.*" not in definition:
+            errors.append(f"dynamic proxy group {name!r} must include all subscription nodes")
 
     known_policies = set(groups) | BUILTIN_POLICIES
     rules = sections.get("Rule", [])
